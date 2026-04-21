@@ -5,11 +5,13 @@ import watchlistRoutes from "./routes/watchlistRoutes";
 import { HTTP_STATUS } from "./constants/httpStatus";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swagger";
+import rateLimiter from "./middleware/rateLimiter";
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(rateLimiter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get("/api/v1/health", (_req: Request, res: Response) => {
