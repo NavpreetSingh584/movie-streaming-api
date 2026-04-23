@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import movieRoutes from "./routes/movieRoutes";
 import watchlistRoutes from "./routes/watchlistRoutes";
+import authRoutes from "./routes/authRoutes";
 import { HTTP_STATUS } from "./constants/httpStatus";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./docs/swagger";
@@ -21,6 +22,7 @@ app.get("/api/v1/health", (_req: Request, res: Response) => {
     });
 });
 
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/movies", movieRoutes);
 app.use("/api/v1/watchlists", watchlistRoutes);
 
